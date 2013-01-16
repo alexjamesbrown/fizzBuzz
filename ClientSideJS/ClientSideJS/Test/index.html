@@ -1,0 +1,25 @@
+﻿<html>
+<head>
+    <title>Mocha</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="mocha.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-1.9.0.min.js"></script>
+    <script src="./mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script>mocha.setup({ globals: ['hasCert'] });</script>
+    <script>
+        function assert(expr, msg) {
+            if (!expr) throw new Error(msg || 'failed');
+        }
+    </script>
+    <script src="./test.fizzbuzz.js"></script>
+    <script>
+        onload = function () {
+            var runner = mocha.run();
+        };
+    </script>
+</head>
+<body>
+    <div id="mocha"></div>
+</body>
+</html>
