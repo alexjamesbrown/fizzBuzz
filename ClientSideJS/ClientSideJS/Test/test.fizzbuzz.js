@@ -34,4 +34,12 @@
             });
         });
     });
+    
+    describe("when asking for numbers 1-15", function () {
+        it("item 15 is fizzBuzz", function() {
+            FizzBuzz.get(1, 15, function(result) {
+                assert(result[14] === "fizzBuzz");
+            });
+        });
+    });
 });

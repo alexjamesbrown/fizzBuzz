@@ -2,10 +2,12 @@
     get: function(start, end, cb) {
         var result = [];
         
-        for (var i = start; i < end; i++) {
-            if (i % 3===0)
+        for (var i = start; i <= end; i++) {
+            if (i % 15 === 0)
+                result.push("fizzBuzz");
+            else if (i % 3===0)
                 result.push("fizz");
-            else if(i%5===0)
+            else if(i % 5===0)
                 result.push("buzz");
             else
                 result.push(i);
