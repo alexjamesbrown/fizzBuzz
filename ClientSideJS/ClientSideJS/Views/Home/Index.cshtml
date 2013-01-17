@@ -38,14 +38,20 @@
                     addItems(30, viewModel);
                 }
             });
+
+            $('#clearAllLink').click(function() {
+                viewModel.items([]);
+            });
         });
 
     </script>
 </head>
 <body>
-
+    <div id="controls">
+        <a id="clearAllLink" href="javascript:void(0)">Clear All</a>
+    </div>
     <div id="main" data-bind="foreach: items">
-        <div data-bind="text: $data"></div>
+        <div class="item" data-bind="text: $data"></div>
     </div>
 
 </body>

@@ -1,1 +1,4 @@
-﻿
+﻿body { font-family: arial,sans-serif; font-size: 12pt;margin: 0;}
+#controls{ background-color: #EEEEEE; padding: 15px}
+#main { font-size: 2em; }
+.item { padding: 15px; }
