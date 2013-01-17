@@ -42,4 +42,12 @@
             });
         });
     });
+    
+    describe("when asking for numbers 1-150", function () {
+        it("item 150 is fizzBuzz", function () {
+            FizzBuzz.get(1, 150, function (result) {
+                assert(result[149] === "fizzBuzz");
+            });
+        });
+    });
 });
