@@ -1,2 +1,52 @@
-﻿
-<h2>title</h2>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>FizzBuzz - Client side JS</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/fizzbuzz.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/knockout-2.2.1.js")"></script>
+
+    <script type="text/javascript">
+        var viewModel = {
+            items: ko.observableArray([]),
+
+            scrolled: function (data, event) {
+                var elem = event.target;
+                if (elem.scrollTop > (elem.scrollHeight - elem.offsetHeight - 200)) {
+                    addItems(20, self);
+                }
+            }
+        };
+
+        function addItems(howMany, vm) {
+            var start = vm.items().length;
+            var end = start + howMany;
+            FizzBuzz.get(start, end, function (items) {
+                ko.utils.arrayForEach(items, function (item) {
+                    vm.items.push(item);
+                });
+            });
+        }
+
+        $(function () {
+            ko.applyBindings(viewModel);
+            addItems(200, viewModel);
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                    addItems(30, viewModel);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+    <div id="main" data-bind="foreach: items">
+        <div data-bind="text: $data"></div>
+    </div>
+
+</body>
+</html>
