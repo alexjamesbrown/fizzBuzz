@@ -35,7 +35,7 @@
 
         it("has correct sequence", function () {
             FizzBuzz.fizzNum = 3;
-            FizzBuzz.fizzNum = 5;
+            FizzBuzz.buzzNum = 5;
             FizzBuzz.get(1, 10, function (result) {
                 result[0] == "1";
                 result[1] == "2";
