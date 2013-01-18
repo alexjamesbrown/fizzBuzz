@@ -1,6 +1,9 @@
 ﻿body { font-family: arial,sans-serif; font-size: 12pt; margin: 0; }
-a { color: #ff4500; text-decoration: none; }
+a { color: #ff4500; text-decoration: none; font-weight: bold; }
     a:hover { text-decoration: underline; }
-#controls { background-color: #EEEEEE; padding: 15px; position: fixed; top: 0; width: 100%; }
+#topBar { background-color: #EEEEEE; position: fixed; top: 0; width: 100%; }
+#addItemsPanel { float: left; }
+#itemsInfoPanel { float: right; font-size: 0.75em; }
+#controls { padding: 15px; }
 #main { font-size: 2em; margin-top: 50px; }
-.item { padding: 15px; }
+.item { padding: 18px; }

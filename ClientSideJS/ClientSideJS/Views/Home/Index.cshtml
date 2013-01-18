@@ -19,7 +19,7 @@
         });
 
         viewModel.addItems = function (startNumber, endNumber) {
-            if (startNumber === 'undefined' || typeof (startNumber)!=='number')
+            if (startNumber === 'undefined' || typeof (startNumber) !== 'number')
                 startNumber = viewModel.startNumber();
             if (endNumber === 'undefined' || typeof (endNumber) !== 'number')
                 endNumber = viewModel.endNumber();
@@ -31,31 +31,35 @@
             });
         };
 
+        viewModel.clearItems = function () {
+            window.scrollTo(0, 0);
+            viewModel.items([]);
+        };
+
         $(function () {
             viewModel.addItems(1, 100);
             ko.applyBindings(viewModel);
 
             $(window).scroll(function () {
-                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                if (viewModel.hasItems() && $(window).scrollTop() == $(document).height() - $(window).height()) {
                     viewModel.addItems(viewModel.items().length, viewModel.items().length + 2);
                 }
             });
-
-            $('#clearAllLink').click(function () {
-                viewModel.items([]);
-            });
         });
-
     </script>
 </head>
 <body>
-    <div id="controls">
-        <a id="clearAllLink" href="javascript:void(0)" data-bind="visible: hasItems()">Clear All</a>
-        <div data-bind="visible: !hasItems()">
-            Add:
+    <div id="topBar">
+        <div id="controls">
+            <a href="javascript:void(0)" data-bind="visible: hasItems(), click: clearItems">Clear All</a>
+            <div id="addItemsPanel" data-bind="visible: !hasItems()">
+                Add:
             <input type="text" placeholder="Start" id="addItemsStartValue" data-bind="value: startNumber" />
-            <input type="text" placeholder="End" id="addItemsEndValue" data-bind="value: endNumber" />
-            | <a href="javascript:void(0)" data-bind="click: addItems">Go</a>
+                <input type="text" placeholder="End" id="addItemsEndValue" data-bind="value: endNumber" />
+                | <a href="javascript:void(0)" data-bind="click: addItems">Go</a>
+            </div>
+
+            <div id="itemsInfoPanel">Showing <span data-bind="text: items().length"></span>&nbsp; items</div>
         </div>
     </div>
     <div id="main" data-bind="foreach: items">
