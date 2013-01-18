@@ -1,4 +1,6 @@
-﻿body { font-family: arial,sans-serif; font-size: 12pt;margin: 0;}
-#controls{ background-color: #EEEEEE; padding: 15px}
-#main { font-size: 2em; }
+﻿body { font-family: arial,sans-serif; font-size: 12pt; margin: 0; }
+a { color: #ff4500; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+#controls { background-color: #EEEEEE; padding: 15px; position: fixed; top: 0; width: 100%; }
+#main { font-size: 2em; margin-top: 50px; }
 .item { padding: 15px; }

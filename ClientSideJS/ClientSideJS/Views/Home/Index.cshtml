@@ -10,36 +10,38 @@
     <script type="text/javascript">
         var viewModel = {
             items: ko.observableArray([]),
-
-            scrolled: function (data, event) {
-                var elem = event.target;
-                if (elem.scrollTop > (elem.scrollHeight - elem.offsetHeight - 200)) {
-                    addItems(20, self);
-                }
-            }
+            startNumber: ko.observable(0),
+            endNumber: ko.observable(200)
         };
 
-        function addItems(howMany, vm) {
-            var start = vm.items().length;
-            var end = start + howMany;
-            FizzBuzz.get(start, end, function (items) {
+        viewModel.hasItems = ko.computed(function () {
+            return viewModel.items().length > 0;
+        });
+
+        viewModel.addItems = function (startNumber, endNumber) {
+            if (startNumber === 'undefined' || typeof (startNumber)!=='number')
+                startNumber = viewModel.startNumber();
+            if (endNumber === 'undefined' || typeof (endNumber) !== 'number')
+                endNumber = viewModel.endNumber();
+
+            FizzBuzz.get(startNumber, endNumber, function (items) {
                 ko.utils.arrayForEach(items, function (item) {
-                    vm.items.push(item);
+                    viewModel.items.push(item);
                 });
             });
-        }
+        };
 
         $(function () {
+            viewModel.addItems(1, 100);
             ko.applyBindings(viewModel);
-            addItems(200, viewModel);
 
             $(window).scroll(function () {
                 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                    addItems(30, viewModel);
+                    viewModel.addItems(viewModel.items().length, viewModel.items().length + 2);
                 }
             });
 
-            $('#clearAllLink').click(function() {
+            $('#clearAllLink').click(function () {
                 viewModel.items([]);
             });
         });
@@ -48,11 +50,16 @@
 </head>
 <body>
     <div id="controls">
-        <a id="clearAllLink" href="javascript:void(0)">Clear All</a>
+        <a id="clearAllLink" href="javascript:void(0)" data-bind="visible: hasItems()">Clear All</a>
+        <div data-bind="visible: !hasItems()">
+            Add:
+            <input type="text" placeholder="Start" id="addItemsStartValue" data-bind="value: startNumber" />
+            <input type="text" placeholder="End" id="addItemsEndValue" data-bind="value: endNumber" />
+            | <a href="javascript:void(0)" data-bind="click: addItems">Go</a>
+        </div>
     </div>
     <div id="main" data-bind="foreach: items">
         <div class="item" data-bind="text: $data"></div>
     </div>
-
 </body>
 </html>
